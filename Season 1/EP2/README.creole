@@ -1,0 +1,35 @@
+= SgtCaze's Tutorials Repo
+
+I have consolidated, reformatted and greatly improved the provided code for readability, scalability and more.
+
+= Index
+
+*EP1 - "Simple Motd" - A simple introduction to event listening
+*EP2 - "Basic Commands" - Creating simple commands with arguments
+*EP3 - "ItemStacks and Lore" - Creating items with display names and lore
+*EP4 - "Virtual Inventories" - Creating virtual inventories with ItemStacks
+*EP5 - "Permissions" - An example of protecting commands/actions with permissions
+*EP6 - "Custom Books" - Create custom books with colored text/meta
+*EP7 - "Fireworks" - Using FireworkBuilder to create fireworks
+*EP8 - "Repeating Tasks" - An example use of the Bukkit scheduler
+*EP9 - "Delayed Tasks" - An example use of the Bukkit scheduler
+*EP11 - "Chat Format" - Create your own chat format with permissions
+*EP11 - "Scoreboards" - Simple example of scoreboards and nametags
+*EP12 - "Signs" - Colored Signs and Sign Recognition
+*EP13 - "Simple Effects" - Creating visual/sound effects for players
+*EP14 - "Spawn Mobs" - Spawning mobs and modifying attributes
+*EP15 - "Manipulation" - Alter mechanics to ride arrows and cancel block physics
+*EP16 - "Projectiles" - Create explosive snowballs and teleporting arrows
+*EP17 - "Json Chat" - Using ChatSerializer to send unique chat formats
+*EP18 - "Boss Bar" - Using BarAPI to modify the boss bar
+*EP19 - "Config Files" - Retrieving simple information from config files
+*EP20 - "Custom Currencies" - Creating unique currencies
+*EP21 - "Animations" - A rudimentary (non-practical) animation of item lore
+*EP22 - "Virtual Shops" - Applying EP20's code to create custom shops
+*EP23 - "Remote Entities" - Implementing Remote Entities to create custom mobs
+*EP24 - "HashMaps" - Demonstration of HashMaps to store keys and objects
+*EP25 - "Minigame" - A simple implementation of game logic/tasks/messages etc
+
+= License
+
+Steal it all.
