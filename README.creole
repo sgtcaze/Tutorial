@@ -39,6 +39,7 @@ To keep the repos in order (ascending), I have split the resources into seasons.
 *EP23 - "Remote Entities" - Implementing Remote Entities to create custom mobs
 *EP24 - "HashMaps" - Demonstration of HashMaps to store keys and objects
 *EP25 - "Minigame" - A simple implementation of game logic/tasks/messages etc
+*EP26 - "MySQL" - How to use MySQL by sending and retrieving data via PreparedStatements
 
 = License
 
