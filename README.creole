@@ -40,6 +40,7 @@ To keep the repos in order (ascending), I have split the resources into seasons.
 *EP24 - "HashMaps" - Demonstration of HashMaps to store keys and objects
 *EP25 - "Minigame" - A simple implementation of game logic/tasks/messages etc
 *EP26 - "MySQL" - How to use MySQL by sending and retrieving data via PreparedStatements
+*EP27 - "Custom Entities and Floating Items" - How to make custom mobs and floating items
 
 = License
 
