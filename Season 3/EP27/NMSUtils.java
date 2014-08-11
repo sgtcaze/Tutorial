@@ -11,6 +11,12 @@ import net.minecraft.server.v1_7_R4.BiomeMeta;
 import net.minecraft.server.v1_7_R4.EntityInsentient;
 import net.minecraft.server.v1_7_R4.EntityTypes;
 
+/**
+* author @BigTeddy98
+* Used for tutorial purposes
+* https://forums.bukkit.org/threads/tutorial-register-your-custom-entities-nms-reflection.258542/
+*/
+
 public class NMSUtils {
 
 	public void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
