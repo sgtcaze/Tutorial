@@ -15,17 +15,15 @@ public class Example extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(this, this);
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void projectiles(ProjectileHitEvent event) {
+	public void onProjectileHit(ProjectileHitEvent event) {
 		Projectile projectile = event.getEntity();
-
 		if (projectile instanceof Snowball) {
 			Snowball snowball = (Snowball) projectile;
 			snowball.getWorld().createExplosion(snowball.getLocation(), 3F);
 		} else if (projectile instanceof Arrow) {
-			Arrow arrow = (Arrow) projectile;
 			if (arrow.getShooter() instanceof Player) {
+			    Arrow arrow = (Arrow) projectile;
 				Player player = (Player) arrow.getShooter();
 				player.teleport(arrow);
 			}

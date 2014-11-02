@@ -15,9 +15,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 
-	Random r = new Random();
+	private Random r = new Random();
 
-	List<String> list = new ArrayList<>();
+	private List<String> list = new ArrayList<>();
 
 	public void onEnable() {		
 		list.add("§0Much Custom. So Tutorial. Wow.");
@@ -43,7 +43,6 @@ public class Example extends JavaPlugin implements Listener {
 	public void showBarChanging(){
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
             public void run(){
-			
 				String message = (String) list.get(r.nextInt(list.size()));
 				
 				for(Player p : Bukkit.getOnlinePlayers()){

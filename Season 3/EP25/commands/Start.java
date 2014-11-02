@@ -8,11 +8,7 @@ import example.Example;
 
 public class Start implements CommandExecutor {
 
-	private Example plugin;
-
-	public Start(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] a) {
@@ -22,8 +18,7 @@ public class Start implements CommandExecutor {
 			return false;
 		}
 
-		plugin.gm.startGame();
-
+		plugin.getGameManager().startGame();
 		return false;
 	}
 }

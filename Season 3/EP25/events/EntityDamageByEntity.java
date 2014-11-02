@@ -10,18 +10,14 @@ import example.Example;
 
 public class EntityDamageByEntity implements Listener {
 
-	private Example plugin;
-
-	public EntityDamageByEntity(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	@EventHandler
-	public void onEDD(EntityDamageByEntityEvent e) {
+	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 		if (e.getDamager() instanceof Player) {
 			Player p = (Player) e.getDamager();
 			if (e.getEntity() instanceof LivingEntity) {
-				if (plugin.spectators.contains(p.getName())) {
+				if (plugin.getGameManager().getSpectators().contains(p.getUniqueId())) {
 					e.setCancelled(true);
 				}
 			}

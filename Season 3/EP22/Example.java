@@ -18,39 +18,46 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 	
-	public FileConfiguration config;
+    private Api api;
 	
-	public HashMap<UUID, Integer> money = new HashMap<>();
+	private static Example plugin;
 	
-	private Api api;
+	private Inventory shop;
 	
-	Inventory shop;
+	private HashMap<UUID, Integer> money = new HashMap<>();
 
 	public void onEnable() {
+	    plugin = this;
+	
+	    api = new Api(this);
+	
 		getServer().getPluginManager().registerEvents(new Listeners(this), this);
-		
-		config = getConfig();
-		
-		api = new Api(this);
-		
-		shop = Bukkit.createInventory(null, 9, "§0§nMy Custom Shop");
 
-		shop.setItem(0, createItem(Material.APPLE, 1, (short) 0, "§3Apple", "§fPrice §6200 §fSilver"));
+		shop = Bukkit.createInventory(null, 9, "§0§nMy Custom Shop");
+		shop.setItem(0, createItem(Material.APPLE, 1, 0, "§3Apple", "§fPrice §6200 §fSilver"));
+	}
+	
+	public void onDisable() {
+		for(UUID u : money.keySet()){
+			getConfig().set(u + ".Silver", money.get(u));
+		}
+		
+		saveConfig();
+	}
+	
+	public static Example getInstance() {
+	    return plugin;
 	}
 	
 	public Api getApi(){
 		return api;
 	}
 	
-	public void onDisable() {
-		for(UUID u : money.keySet()){
-			config.set(u + ".Silver", money.get(u));
-		}
-		
-		saveConfig();
+    public HashMap<UUID, Integer> getMoney() {
+	    return money;
 	}
 
-	public ItemStack createItem(Material material, int amount, int shrt, String displayname, String lore) {
+	private ItemStack createItem(Material material, int amount, int shrt, String displayname, String lore) {
 		ItemStack item = new ItemStack(material, amount, (short) shrt);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(displayname);
@@ -59,8 +66,12 @@ public class Example extends JavaPlugin implements Listener {
 		return item;
 	}
 	
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-			String[] a) {
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
+	
+	    if(!(sender instanceof Player)) {
+		    return false;
+		}
+	
 		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("shop")) {
 			player.openInventory(shop);

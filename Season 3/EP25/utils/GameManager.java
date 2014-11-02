@@ -7,44 +7,100 @@ import example.Example;
 
 public class GameManager {
 
-	private Example plugin;
+	private Example plugin = Example.getInstance();
+	
+    private World arenaworld, lobbyworld;
+	
+	private List<UUID> players = new ArrayList<>();
+	private List<UUID> spectators = new ArrayList<>();
+	private List<Location> arenaSpawns = new ArrayList<>();
 
-	public GameManager(Example plugin) {
-		this.plugin = plugin;
+	private HashMap<UUID, Integer> kills = new HashMap<>();
+	private HashMap<UUID, Integer> points = new HashMap<>();
+	private HashMap<UUID, Integer> deaths = new HashMap<>();
+	
+	public GameManager() {
+		getServer().createWorld(new WorldCreator("Arenaworld"));
+
+		lobbyworld = Bukkit.getWorld("world");
+		arenaworld = Bukkit.getWorld("Arenaworld");
+		
+		GameState.state = GameState.LOBBY;
 	}
 
+	public World getArenaWorld() {
+	    return arenaworld;
+	}
+	
+	public World getLobbyWorld() {
+	    return lobbyworld;
+	}
+	
+	public List<UUID> getPlayers() {
+	    return players;
+	}
+	
+	public List<UUID> getSpectators() {
+	    return spectators;
+	}
+	
+	public List<Location> getSpawns() {
+	    return arenaSpawns;
+	}
+	
+	public HashMap<UUID, Integer> getKills() {
+	    return kills;
+	}
+	
+	public HashMap<UUID, Integer> getPoints() {
+	    return points;
+	}
+	
+	public HashMap<UUID, Integer> getDeaths() {
+	    return deaths;
+	}
+	
+	public void setArenaSpawns(List<Location> list) {
+	    this.arenaSpawns = list;
+	}
+	
+	public enum GameState {
+	    
+		LOBBY, STARTED, ENDED;
+		
+		public static GameState state;
+	}
+	
 	public void startGame() {
+		GameState.state = GameState.STARTED;
 
-		plugin.gameStarted = true;
-
-		plugin.spawnHandler.teleportToArena();
+		plugin.getSpawnHandler().teleportToArena();
 
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			plugin.players.add(p.getName());
-			plugin.points.put(p.getName(), 0);
-			plugin.kills.put(p.getName(), 0);
-			plugin.deaths.put(p.getName(), 0);
-			plugin.totalAlive++;
+		    UUID uuid = p.getUniqueId();
+			players.add(uuid);
+			points.put(uuid, 0);
+			kills.put(uuid, 0);
+			deaths.put(uuid, 0);
 			plugin.scoreboard(p);
 		}
 
 		Bukkit.broadcastMessage("§cThe game has started! First to 5 kills wins!");
 	}
 
-	@SuppressWarnings("deprecation")
 	public void endGame() {
-
-		plugin.gameEnded = true;
+		GameState.state = GameState.ENDED;
 
 		Player winner = null;
 
-		for (String s : plugin.players) {
+		for (UUID uuids : players) {
 			winner = Bukkit.getPlayer(s);
 			Bukkit.broadcastMessage("§cThe game has ended! Winner: " + s);
+			break;
 		}
 
 		if (winner != null) {
-			plugin.api.firework(winner);
+			plugin.getApi().firework(winner);
 		}
 	}
 }

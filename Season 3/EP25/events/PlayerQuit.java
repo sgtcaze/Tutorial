@@ -9,27 +9,22 @@ import example.Example;
 
 public class PlayerQuit implements Listener {
 
-	private Example plugin;
-
-	public PlayerQuit(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 
-		if (plugin.gameStarted) {
-			if (plugin.players.contains(p.getName())) {
-				plugin.api.addDeaths(p, 1);
-				plugin.totalAlive--;
-				plugin.players.remove(p.getName());
+		if (GameState.state == GameState.INGAME) {
+			if (plugin.getGameManager().getPlayers().contains(p.getUniqueId())) {
+				plugin.getApi().addDeaths(p, 1);
+				plugin.players.remove(p.getUniqueId());
 			}
 		}
 
 		if (plugin.totalAlive <= 2) {
-			if (plugin.gameEnded) {
-				plugin.gm.endGame();
+			if (GameState.state != GameState.ENDED) {
+				plugin.getGameManager().endGame();
 			}
 		}
 	}

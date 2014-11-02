@@ -17,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 
-	public void spawnCow(Location loc) {
+	private void spawnCow(Location loc) {
 		Cow cow = (Cow) loc.getWorld().spawn(loc, Cow.class);
 		cow.setBaby();
 		cow.setAgeLock(true);
@@ -25,7 +25,7 @@ public class Example extends JavaPlugin implements Listener {
 		cow.setCustomNameVisible(true);
 	}
 	
-	public void spawnVillager(Location loc) {
+	private void spawnVillager(Location loc) {
 		Villager v = (Villager) loc.getWorld().spawn(loc, Villager.class);
 		v.setCustomName(ChatColor.GREEN + "Tom");
 		v.setCustomNameVisible(true);
@@ -34,7 +34,7 @@ public class Example extends JavaPlugin implements Listener {
 		v.setProfession(Profession.LIBRARIAN);
 	}
 	
-	public void spawnSkeleton(Location loc) {
+	private void spawnSkeleton(Location loc) {
 		Skeleton s = (Skeleton) loc.getWorld().spawn(loc, Skeleton.class);
 		s.setCustomName(ChatColor.AQUA + "9001");
 		s.setCustomNameVisible(true);
@@ -43,10 +43,14 @@ public class Example extends JavaPlugin implements Listener {
 		s.getEquipment().setHelmet(new ItemStack(Material.CACTUS));
 	}
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-			String[] a) {
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
+			
+		if(!(sender instanceof Player)) {
+		    return false;
+		}
+		
+		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("test")) {
-			Player player = (Player) sender;
 			Location loc = player.getLocation();
 			
 			// Your method

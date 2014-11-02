@@ -14,10 +14,8 @@ public class Example extends JavaPlugin implements Listener {
 	}
 	
 	@EventHandler
-	public void onChat(AsyncPlayerChatEvent event){
-		Player player = event.getPlayer();
-		
-		if(player.hasPermission("chat.normal")){
+	public void onChat(AsyncPlayerChatEvent event){		
+		if(event.getPlayer().hasPermission("chat.normal")){
 			event.setFormat(ChatColor.LIGHT_PURPLE + "%s" + ChatColor.DARK_AQUA + " > " + ChatColor.GREEN + "%s");
 		}
 	}

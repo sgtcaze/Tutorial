@@ -21,9 +21,9 @@ public class Example extends JavaPlugin implements Listener {
 	private Example plugin;
 
 	public void onEnable() {
+	    plugin = this;
+	
 		getServer().getPluginManager().registerEvents(this, this);
-
-		plugin = this;
 
 		// Run Async, then run something sync immediately after
 		new BukkitRunnable() {
@@ -50,17 +50,16 @@ public class Example extends JavaPlugin implements Listener {
 	}
 
 	// Open the MySQL Connection
-	public synchronized void openConnection() {
+	private synchronized void openConnection() {
 		try {
-			connection = DriverManager.getConnection(
-					"jbdc:mysql://localhost:3306/youtube", "root", "");
+			connection = DriverManager.getConnection("jbdc:mysql://localhost:3306/youtube", "root", "");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	// Check if MySQL contains an element
-	public boolean containsElement(String field, String element){
+	private boolean containsElement(String field, String element){
 		String query = "SELECT `" + field + "` FROM `tutorial` WHERE `" + field + "`='" + element + "`";
 		
 		try {
@@ -75,12 +74,13 @@ public class Example extends JavaPlugin implements Listener {
 	}
 	
 	// Add an element to MySQL
-	public void insertElement(String element, String uuid){
-		// String query = "INSERT INTO `tutorial` VALUES('" + element + ", '" + uuid + "')";
-		String query = "INSERT INTO `tutorial` (`name`, `uuid`) VALUES('" + element + ", '" + uuid + "')";
-		
+	private void insertElement(String element, String uuid){	
 		try {
+		    String query = "INSERT INTO `tutorial` VALUES(?, ?);"
+		
 			PreparedStatement p = connection.prepareStatement(query);
+			p.setString(1, element);
+			p.setString(2, uuid);
 			p.execute();
 			p.close();
 		} catch (SQLException e){
@@ -89,7 +89,7 @@ public class Example extends JavaPlugin implements Listener {
 	}
 	
 	// Get an entire column in MySQL
-	public List<String> getColumn(String columnName) {
+	private List<String> getColumn(String columnName) {
 		List<String> temp = new ArrayList<>();
 
 		String query = "SELECT `" + columnName + "` FROM `tutorial`";
@@ -104,8 +104,8 @@ public class Example extends JavaPlugin implements Listener {
 			res.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+		    return temp;
 		}
-
-		return temp;
 	}
 }

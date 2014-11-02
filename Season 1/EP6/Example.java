@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin {
 
-	ItemStack book;
+	private ItemStack book;
 
 	public void onEnable(){
 		book = new ItemStack(Material.WRITTEN_BOOK);
@@ -25,6 +25,11 @@ public class Example extends JavaPlugin {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
+	
+	    if(!(sender instanceof Player)) {
+		    return false;
+		}
+	
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("test")){
 			player.getInventory().addItem(book);

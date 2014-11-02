@@ -39,21 +39,16 @@ public class Example extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		Player player = event.getPlayer();
 		Block b = event.getClickedBlock();
-		Action action = event.getAction();
 
-		if (event.getClickedBlock() == null) {
+		if (b == null) {
 			return;
 		}
 
-		if (action == Action.RIGHT_CLICK_BLOCK
-				&& b != null
-				&& (b.getType() == Material.SIGN_POST || b.getType() == Material.WALL_SIGN)) {
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK && b != null && (b.getType() == Material.SIGN_POST || b.getType() == Material.WALL_SIGN)) {
 			Sign sign = (Sign) b.getState();
-			if (sign.getLine(0).equals("Line 1")
-					&& sign.getLine(1).equals(ChatColor.GREEN + "Line 2")) {
-				player.sendMessage(ChatColor.RED + "That's a colored sign!");
+			if (sign.getLine(0).equals("Line 1") && sign.getLine(1).equals(ChatColor.GREEN + "Line 2")) {
+				event.getPlayer().sendMessage(ChatColor.RED + "That's a colored sign!");
 			}
 		}
 	}

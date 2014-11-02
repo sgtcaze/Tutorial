@@ -12,45 +12,36 @@ import org.bukkit.inventory.ItemStack;
 
 public class Listeners implements Listener {
 
-	private Example plugin;
-	
-	public Listeners(Example plugin){
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
+		UUID uuid = e.getPlayer().getUniqueId();
 
-		if (!plugin.config.contains(p.getUniqueId().toString())) {
-			plugin.money.put(p.getUniqueId(), 0);
+		if (!plugin.getConfig().contains(uuid.toString())) {
+			plugin.getMoney().put(uuid, 0);
 		} else {
-			plugin.money.put(p.getUniqueId(), plugin.config.getInt(p.getUniqueId() + ".Silver"));
+			plugin.getMoney().put(uuid, plugin.getConfig().getInt(p.getUniqueId() + ".Silver"));
 		}
 	}
 
 	@EventHandler
 	public void onKill(EntityDeathEvent e) {
-
 		if (e.getEntity() instanceof Monster) {
-			Monster m = (Monster) e.getEntity();
-			if (m.getKiller() instanceof Player) {
-				Player p = m.getKiller();
-
+			if (e.getEntity().getKiller() instanceof Player) {
+				Player p = e.getEntity().getKiller()
 				plugin.getApi().giveSilver(p, 200);
 			}
 		} else if (e.getEntity() instanceof Villager) {
-			Villager v = (Villager) e.getEntity();
-			if (v.getKiller() instanceof Player) {
-				Player p = v.getKiller();
+			if (e.getEntity().getKiller() instanceof Player) {
+				Player p = e.getEntity().getKiller()
 				plugin.getApi().takeSilver(p, 200);
 			}
 		}
 	}
 	
 	@EventHandler
-	public void onClick(InventoryClickEvent event) {
-		Player p = (Player) event.getWhoClicked();
+	public void onClick(InventoryClickEvent event) {		
 		ItemStack item = event.getCurrentItem();
 		
 		if (event.getInventory().getName().equals("§0My Custom Shop")) {
@@ -58,6 +49,8 @@ public class Listeners implements Listener {
 
 			if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
 				if(item.getItemMeta().getDisplayName().equals("§3Apple")){
+      				Player p = (Player) event.getWhoClicked();
+					
 					if (plugin.getApi().hasEnough(p, 25)) {
 						plugin.getApi().takeSilver(p, 25);
 					} else {

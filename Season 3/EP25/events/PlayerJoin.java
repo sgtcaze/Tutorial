@@ -9,18 +9,13 @@ import example.Example;
 
 public class PlayerJoin implements Listener {
 
-	private Example plugin;
-
-	public PlayerJoin(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-
-		if (!plugin.gameStarted) {
+		if (GameState.state == GameState.STARTED) {
 			if (Bukkit.getOnlinePlayers().length >= 2) {
-				plugin.gm.startGame();
+				plugin.getGameManager().startGame();
 			}
 		}
 	}

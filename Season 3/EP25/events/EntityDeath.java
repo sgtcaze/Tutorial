@@ -9,11 +9,7 @@ import example.Example;
 
 public class EntityDeath implements Listener {
 
-	private Example plugin;
-
-	public EntityDeath(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	@EventHandler
 	public void onDeath(EntityDeathEvent e) {
@@ -22,16 +18,16 @@ public class EntityDeath implements Listener {
 			if (victim.getKiller() instanceof Player) {
 				Player killer = (Player) victim.getKiller();
 
-				plugin.api.addDeaths(victim, 1);
-				plugin.api.addKills(killer, 1);
-				plugin.api.addPoints(killer, 5);
+				plugin.getApi().addDeaths(victim, 1);
+				plugin.getApi().addKills(killer, 1);
+				plugin.getApi().addPoints(killer, 5);
 
-				plugin.scoreboard(killer);
-				plugin.scoreboard(victim);
+				plugin.getApi().scoreboard(killer);
+				plugin.getApi().scoreboard(victim);
 
-				if (!plugin.gameEnded) {
-					if (plugin.api.getKills(killer) >= 5) {
-						plugin.gm.endGame();
+				if (GameState.state != GameState.ENDED) {
+					if (plugin.getApi().getKills(killer) >= 5) {
+						plugin.getGameManager().endGame();
 					}
 				}
 			}

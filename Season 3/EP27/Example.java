@@ -18,8 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Example extends JavaPlugin {
 
 	public void onEnable(){		
-		NMSUtils nms = new NMSUtils();
-		nms.registerEntity("Bat", 65, EntityBat.class, CrazyBat.class);
+		new NMSUtils().registerEntity("Bat", 65, EntityBat.class, CrazyBat.class);
 		
 		for(Entity e : Bukkit.getWorld("world").getEntities()){
 			if(!(e instanceof Player)){

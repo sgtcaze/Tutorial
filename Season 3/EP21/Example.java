@@ -17,33 +17,31 @@ public class Example extends JavaPlugin implements Listener {
 	
 	// Useful Symbol: █
 
-	Inventory inv;
+	private int num = 1;
 	
-	int num = 1;
-	
+	private Inventory inv;
+
 	public void onEnable() {		
 		inv = Bukkit.createInventory(null, 9, "§0§nThe Magic Inventory");
 		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this,
 				new Runnable() {
-					public void run() {
-						
+					public void run() {			
 						switch(num){
-							case 1: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§aA§fnimation", "")); num++; break;
-							case 2: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§fA§an§fimation", "§2H")); num++; break;
-							case 3: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§fAn§ai§fmation", "§2HE")); num++; break;
-							case 4: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§fAni§am§fation", "§2HEL")); num++; break;
-							case 5: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§fAnim§aa§ftion", "§2HELL")); num++; break;
-							case 6: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§fAnima§at§fion", "§2HELLO")); num++; break;
-							case 7: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§fAnimati§ao§fn", "§2HELLO!")); num++; break;
-							case 8: inv.setItem(0, make(Material.APPLE, 1, (short) 0, "§fAnimatio§an", "§2HELLO! :D")); num = 1; break;
+							case 1: inv.setItem(0, make(Material.APPLE, 1, 0, "§aA§fnimation", "")); num++; break;
+							case 2: inv.setItem(0, make(Material.APPLE, 1, 0, "§fA§an§fimation", "§2H")); num++; break;
+							case 3: inv.setItem(0, make(Material.APPLE, 1, 0, "§fAn§ai§fmation", "§2HE")); num++; break;
+							case 4: inv.setItem(0, make(Material.APPLE, 1, 0, "§fAni§am§fation", "§2HEL")); num++; break;
+							case 5: inv.setItem(0, make(Material.APPLE, 1, 0, "§fAnim§aa§ftion", "§2HELL")); num++; break;
+							case 6: inv.setItem(0, make(Material.APPLE, 1, 0, "§fAnima§at§fion", "§2HELLO")); num++; break;
+							case 7: inv.setItem(0, make(Material.APPLE, 1, 0, "§fAnimati§ao§fn", "§2HELLO!")); num++; break;
+							case 8: inv.setItem(0, make(Material.APPLE, 1, 0, "§fAnimatio§an", "§2HELLO! :D")); num = 1; break;
 						}
 					}
 				}, 0, 1 * 2);
 		}
 	
-	public ItemStack make(Material material, int amount,
-			int shrt, String displayname, String lore) {
+	private ItemStack make(Material material, int amount, int shrt, String displayname, String lore) {
 		ItemStack item = new ItemStack(material, amount, (short) shrt);
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(displayname);
@@ -54,7 +52,12 @@ public class Example extends JavaPlugin implements Listener {
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] a) {
-		final Player player = (Player) sender;
+			
+	    if(!(sender instanceof Player)) {
+		    return false;
+		}
+		
+		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("test")) {
 			player.openInventory(inv);
 		}

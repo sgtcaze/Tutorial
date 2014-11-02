@@ -17,7 +17,6 @@ import de.kumpelblase2.remoteentities.api.RemoteEntityType;
 public class Example extends JavaPlugin implements Listener {
 
 	public void onEnable() {
-		
 		getServer().getPluginManager().registerEvents(this, this);
 		
 		for(Entity e : Bukkit.getWorld("world").getEntities()){
@@ -29,7 +28,7 @@ public class Example extends JavaPlugin implements Listener {
 		ourEntities();
 	}
 	
-	public void ourEntities(){
+	private void ourEntities(){
 		Location loc = new Location(Bukkit.getWorld("world"), 294.5, 64, 281.5);
 		
 		EntityManager manager = RemoteEntities.createManager(this);

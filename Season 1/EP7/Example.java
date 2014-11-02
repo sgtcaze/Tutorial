@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin {
 
-	public void firework(Player player){
+	private void firework(Player player){
         Firework fw = (Firework) player.getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
         FireworkMeta fwmeta = fw.getFireworkMeta();
         FireworkEffect.Builder builder = FireworkEffect.builder();
@@ -25,6 +25,11 @@ public class Example extends JavaPlugin {
    }
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
+	   
+	    if(!(sender instanceof Player)) {
+		    return false;
+		}
+
 		Player player = (Player) sender;
 		if(cmd.getName().equalsIgnoreCase("test")){
 			firework(player);

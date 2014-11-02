@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 	
-	HashMap<UUID, Integer> money = new HashMap<>();
+	private HashMap<UUID, Integer> money = new HashMap<>();
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
@@ -41,30 +41,27 @@ public class Example extends JavaPlugin implements Listener {
 	}
 
 	@EventHandler
-	public void onKill(EntityDeathEvent e) {
-
+	public void onEntityDeath(EntityDeathEvent e) {
 		if (e.getEntity() instanceof Monster) {
-			Monster m = (Monster) e.getEntity();
-			if (m.getKiller() instanceof Player) {
+			if (e.getEntity().getKiller() instanceof Player) {
 				Player p = m.getKiller();
 				giveSilver(p, 200);
 			}
 		} else if (e.getEntity() instanceof Villager) {
-			Villager v = (Villager) e.getEntity();
-			if (v.getKiller() instanceof Player) {
+			if (e.getEntity() instanceof Player) {
 				Player p = v.getKiller();
 				takeSilver(p, 200);
 			}
 		}
 	}
 
-	public void giveSilver(Player p, int i) {
+	private void giveSilver(Player p, int i) {
 		UUID uuid = p.getUniqueId();
 		money.put(uuid, money.get(uuid) +i);
 		p.sendMessage("§2§l$" + i + " silver received!");
 	}
 
-	public void takeSilver(Player p, int i) {
+	private void takeSilver(Player p, int i) {
 		UUID uuid = p.getUniqueId();
 		money.put(uuid, money.get(uuid) -i);
 		p.sendMessage("§c§l$" + i + " silver taken!");

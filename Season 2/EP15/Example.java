@@ -17,7 +17,7 @@ public class Example extends JavaPlugin implements Listener {
 	}
 
 	@EventHandler
-	public void EntityShootBowEvent(EntityShootBowEvent e) {
+	public void onEntityShootBowEvent(EntityShootBowEvent e) {
 		if (e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
 			Projectile proj = (Projectile) e.getProjectile();
@@ -27,8 +27,7 @@ public class Example extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent e) {
-		Player p = (Player) e.getPlayer();
-		e.getRightClicked().setPassenger(p);
+		e.getRightClicked().setPassenger(e.getPlayer());
 	}
 
 	@EventHandler

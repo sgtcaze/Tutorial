@@ -15,8 +15,8 @@ import org.bukkit.scoreboard.Team;
 
 public class Example extends JavaPlugin implements Listener {
 	
-	Scoreboard board;
-	Team team;
+	private Team team;
+	private Scoreboard board;
 
 	public void onEnable(){
 		getServer().getPluginManager().registerEvents(this, this);
@@ -24,17 +24,15 @@ public class Example extends JavaPlugin implements Listener {
 		makeScoreboard();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void makeScoreboard(){
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		board = manager.getNewScoreboard();
+		board = Bukkit.getScoreboardManager().getNewScoreboard();
 		
 		Objective objective = board.registerNewObjective("Test", "Test2");
 		objective.setDisplayName(ChatColor.AQUA + "Statistics");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
 		team = board.registerNewTeam("Team");
-		team.setPrefix(ChatColor.RED + "");
+		team.setPrefix(ChatColor.RED + "[Test] ");
 
 		Score score = objective.getScore(ChatColor.GOLD + "Online Players");
 		score.setScore(Bukkit.getOnlinePlayers().length);
@@ -51,7 +49,8 @@ public class Example extends JavaPlugin implements Listener {
 	
 	@EventHandler
 	public void onjoin(PlayerJoinEvent e){
-		team.addPlayer(e.getPlayer());
-		e.getPlayer().setScoreboard(board);
+	    Player p = e.getPlayer();
+		team.addPlayer(p);
+		p.setScoreboard(board);
 	}	
 }

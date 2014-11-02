@@ -13,36 +13,21 @@ import example.utils.ParticleUtils;
 
 public class PlayerDeath implements Listener {
 
-	private Example plugin;
-
-	public PlayerDeath(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e) {
 		Player p = (Player) e.getEntity();
 
-		plugin.api.addDeaths(p, 1);
+		plugin.getApi().addDeaths(p, 1);
 
-		if (plugin.api.getDeaths(p) == 5) {
-			plugin.api.setSpectator(p);
+		if (plugin.getApi().getDeaths(p) == 5) {
+			plugin.getApi().setSpectator(p);
 		}
-
-		for (Player pl : Bukkit.getOnlinePlayers()) {
-			try {
-				ParticleUtils.spawnParticles(p.getLocation(), pl, "flame", 80);
-			} catch (ClassNotFoundException | IllegalAccessException
-					| InstantiationException | NoSuchMethodException
-					| NoSuchFieldException | IllegalArgumentException
-					| InvocationTargetException e1) {
-				e1.printStackTrace();
-			}
-		}
-
-		plugin.scoreboard(p);
+		
+		plugin.getApi().scoreboard(p);
 
 		p.setHealth(20D);
-		p.teleport(plugin.arenaSpawns.get(1));
+		p.teleport(plugin.getGameManager().getSpawns().get(1));
 	}
 }

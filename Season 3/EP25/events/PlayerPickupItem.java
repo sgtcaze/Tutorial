@@ -9,18 +9,11 @@ import example.Example;
 
 public class PlayerPickupItem implements Listener {
 
-	private Example plugin;
-
-	public PlayerPickupItem(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	@EventHandler
 	public void onDrop(PlayerPickupItemEvent e) {
-		Player p = e.getPlayer();
-
-		if (plugin.spectators.contains(p.getName())) {
+		if (plugin.getGameManager().getSpectators().contains(e.getPlayer().getUniqueId()))
 			e.setCancelled(true);
-		}
 	}
 }

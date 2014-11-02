@@ -18,8 +18,7 @@ public class Example extends JavaPlugin implements Listener {
 	}
 
 	public void exampleJson(Player player) {
-		IChatBaseComponent comp = ChatSerializer
-				.a("{\"text\":\"Welcome to my server! \",\"extra\":[{\"text\":\"§bClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§cThis §dIs §aSo §bCool!\"},\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/list\"}}]}");
+		IChatBaseComponent comp = ChatSerializer.a("{\"text\":\"Welcome to my server! \",\"extra\":[{\"text\":\"§bClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§cThis §dIs §aSo §bCool!\"},\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/list\"}}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}

@@ -11,14 +11,9 @@ import example.Example;
 
 public class SpawnHandler {
 
-	private Example plugin;
-
-	public SpawnHandler(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	public void teleportToArena() {
-
 		int counter = 0;
 
 		for (Player p : Bukkit.getOnlinePlayers()) {
@@ -27,36 +22,36 @@ public class SpawnHandler {
 	}
 
 	public void loadSpawns(String arenaName) {
-		ArrayList<Location> temp = new ArrayList<>();
+	    FileConfiguration config = plugin.getConfig();
+		
+		List<Location> temp = new ArrayList<>();
 
-		int amount = plugin.config.getInt("Spawns." + arenaName + ".amount");
+		int amount = config.getInt("Spawns." + arenaName + ".amount");
 
-		World world = Bukkit.getWorld(plugin.config.getString("Spawns."
-				+ arenaName + ".world"));
+		World world = Bukkit.getWorld(config.getString("Spawns." + arenaName + ".world"));
 
 		for (int i = 1; i <= amount; i++) {
-			double x = plugin.config.getDouble("Spawns." + arenaName + "." + i
-					+ ".x");
-			double y = plugin.config.getDouble("Spawns." + arenaName + "." + i
-					+ ".y");
-			double z = plugin.config.getDouble("Spawns." + arenaName + "." + i
-					+ ".z");
+			double x = config.getDouble("Spawns." + arenaName + "." + i + ".x");
+			double y = config.getDouble("Spawns." + arenaName + "." + i + ".y");
+			double z = config.getDouble("Spawns." + arenaName + "." + i + ".z");
 
 			temp.add(new Location(world, x, y, z));
 		}
 
-		plugin.arenaSpawns = temp;
+		plugin.getGameManager().getArenaSpawns(temp);
 	}
 
 	public void setSpawn(Player p, String arenaName) {
-		int amount = plugin.config.getInt("Spawns." + arenaName + ".amount");
+	    FileConfiguration config = plugin.getConfig();
+	
+		int amount = config.getInt("Spawns." + arenaName + ".amount");
 
 		int next = amount + 1;
 
 		String world = p.getWorld().getName();
 
-		plugin.config.set("Spawns." + arenaName + "amount", next);
-		plugin.config.set("Spawns." + arenaName + "." + next + ".world", world);
+		config.set("Spawns." + arenaName + "amount", next);
+		config.set("Spawns." + arenaName + "." + next + ".world", world);
 
 		Location loc = p.getLocation();
 
@@ -64,10 +59,10 @@ public class SpawnHandler {
 		double y = loc.getY();
 		double z = loc.getZ();
 
-		plugin.config.set("Spawns." + arenaName + "." + next + ".x", x);
-		plugin.config.set("Spawns." + arenaName + "." + next + ".y", y);
-		plugin.config.set("Spawns." + arenaName + "." + next + ".z", z);
+		config.set("Spawns." + arenaName + "." + next + ".x", x);
+		config.set("Spawns." + arenaName + "." + next + ".y", y);
+		config.set("Spawns." + arenaName + "." + next + ".z", z);
 
-		plugin.plugin.saveConfig();
+		plugin.saveConfig();
 	}
 }

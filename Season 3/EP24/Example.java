@@ -12,9 +12,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 	
-	HashMap<String, Integer> money = new HashMap<>();
-	HashMap<String, String> message = new HashMap<>();
-	HashMap<String, ItemStack> item = new HashMap<>();
+	private HashMap<String, Integer> money = new HashMap<>();
+	private HashMap<String, String> message = new HashMap<>();
+	private HashMap<String, ItemStack> item = new HashMap<>();
 
 	public void onEnable() {
 		money.put("sgtcazeyt", 35);
@@ -23,17 +23,24 @@ public class Example extends JavaPlugin implements Listener {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
+	
+	    if(!(sender instanceof Player)) {
+		    return false;
+		}
+	
 		Player player = (Player) sender;
+		String name = player.getName();
+		
 		if(cmd.getName().equalsIgnoreCase("money")){
-			player.sendMessage("§aYour money is§f " + money.get(player.getName()));
+			player.sendMessage("§aYour money is§f " + money.get(name));
 		} else if(cmd.getName().equalsIgnoreCase("message")){
-			player.sendMessage("§cThe message is§f " + message.get(player.getName()));
+			player.sendMessage("§cThe message is§f " + message.get(name));
 		} else if(cmd.getName().equalsIgnoreCase("item")){
 			player.sendMessage("§bHere is the item in the map!");
-			player.getInventory().addItem(item.get(player.getName()));
+			player.getInventory().addItem(item.get(name));
 		} else if(cmd.getName().equalsIgnoreCase("add")){
 			player.sendMessage("§dAdded +5 to your money!");
-			money.put(player.getName(), money.get(player.getName())+5);
+			money.put(player.getName(), money.get(name)+5);
 		}
 		return false;
 	}

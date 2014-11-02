@@ -13,15 +13,12 @@ public class Example extends JavaPlugin {
 		ourTask();
 	}
 
-	public void ourTask(){
-	
-		final ItemStack test = new ItemStack(Material.BAKED_POTATO, 1);
-	
+	public void ourTask(){	
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
 			public void run(){
 				for(Player p : Bukkit.getOnlinePlayers()){	
 					p.sendMessage(ChatColor.GREEN + "This is the runnable. Have a potato!");
-					p.getInventory().addItem(test);
+					p.getInventory().addItem(new ItemStack(Material.BAKED_POTATO, 1));
 				}
 			}
 		}, 0, 5 * 20); // 20 ticks = 1 second. So 5 * 20 = 100 which is 5 seconds

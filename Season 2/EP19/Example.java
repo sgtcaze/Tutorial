@@ -11,20 +11,29 @@ public class Example extends JavaPlugin {
 		saveDefaultConfig();
 	}
 
+	private String colorize(String input) {
+	    return ChatColor.translateAlternateColorCodes("&", input);
+	}
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] a) {
+		
+		if(!(sender instanceof Player)) {
+		    return false;
+		}
+			
 		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("integer")) {
 			player.sendMessage("The Integer is: " + getConfig().getInt("Integer"));
 		}
 		if (cmd.getName().equalsIgnoreCase("string")) {
-			player.sendMessage("The String is: " + getConfig().getString("String").replaceAll("&", ""));
+			player.sendMessage("The String is: " + colorize(getConfig().getString("String")));
 		}
 		if (cmd.getName().equalsIgnoreCase("boolean")) {
 			if (getConfig().getBoolean("Boolean")) {
-				player.sendMessage("The Boolean is: 2Enabled");
+				player.sendMessage(colorize("The Boolean is: &2Enabled"));
 			} else {
-				player.sendMessage("The Boolean is: 4Disabled");
+				player.sendMessage(colorize("The Boolean is: &4Disabled"));
 			}
 		}
 		return false;

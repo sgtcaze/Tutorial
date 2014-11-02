@@ -9,18 +9,11 @@ import example.Example;
 
 public class PlayerDropItem implements Listener {
 
-	private Example plugin;
-
-	public PlayerDropItem(Example plugin) {
-		this.plugin = plugin;
-	}
+	private Example plugin = Example.getInstance();
 
 	@EventHandler
 	public void onDrop(PlayerDropItemEvent e) {
-		Player p = e.getPlayer();
-
-		if (plugin.spectators.contains(p.getName())) {
+		if (plugin.getGameManager().getSpectators().contains(e.getPlayer().getUniqeId()))
 			e.setCancelled(true);
-		}
 	}
 }
