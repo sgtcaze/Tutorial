@@ -13,7 +13,7 @@ public class Example extends JavaPlugin {
 
 	private ItemStack book;
 
-	public void onEnable(){
+	public void onEnable() {
 		book = new ItemStack(Material.WRITTEN_BOOK);
 		BookMeta bm = (BookMeta) book.getItemMeta();
 		bm.addPage("1", "2");
@@ -23,15 +23,15 @@ public class Example extends JavaPlugin {
 		bm.setDisplayName(ChatColor.RED + "Tutorial");
 		book.setItemMeta(bm);
 	}
-	
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
-	
-	    if(!(sender instanceof Player)) {
-		    return false;
+
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
+
+		if (!(sender instanceof Player)) {
+			return false;
 		}
-	
+
 		Player player = (Player) sender;
-		if(cmd.getName().equalsIgnoreCase("test")){
+		if (cmd.getName().equalsIgnoreCase("test")) {
 			player.getInventory().addItem(book);
 		}
 		return false;

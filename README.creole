@@ -1,6 +1,10 @@
 = SgtCaze's Tutorials Repo
 
-I have consolidated, reformatted and greatly improved the provided code for readability, scalability and more.
+I have consolidated, reformatted and greatly improved the provided code for readability, scalability and more. If you have a concern, please open an issue using Github's issue tracker.
+
+= Deprecation
+
+The YouTube videos associated with Seasons 1 - 3 are now considered deprecated. They may contain poor programming practices, bugs or other issues. Please refer to this repository for updated and concise code.
 
 = Seasons
 

@@ -10,8 +10,7 @@ public class Start implements CommandExecutor {
 
 	private Example plugin = Example.getInstance();
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-			String[] a) {
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
 
 		if (!sender.hasPermission("game.start")) {
 			sender.sendMessage("§cNo permission!");

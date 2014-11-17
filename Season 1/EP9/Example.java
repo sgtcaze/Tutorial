@@ -10,24 +10,24 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin {
-	
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
-	
-	    if(!(sender instanceof Player)) {
-		    return false;
+
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
+
+		if (!(sender instanceof Player)) {
+			return false;
 		}
-	
+
 		Player player = (Player) sender;
-		if(cmd.getName().equalsIgnoreCase("test")){
+		if (cmd.getName().equalsIgnoreCase("test")) {
 			player.sendMessage("You will have to wait 5 seconds for the item!");
 			giveDelay(player);
 		}
 		return false;
 	}
-	
-	public void giveDelay(final Player player){
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
-			public void run(){
+
+	public void giveDelay(final Player player) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+			public void run() {
 				player.sendMessage(ChatColor.GREEN + "This is the delay.");
 				player.getInventory().addItem(new ItemStack(Material.APPLE));
 			}

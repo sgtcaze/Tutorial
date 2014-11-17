@@ -18,12 +18,16 @@ public class Example extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(this, this);
 	}
 
+	private String colorize(String input) {
+		return ChatColor.translateAlternateColorCodes('&', input);
+	}
+
 	@EventHandler
 	public void onSign(SignChangeEvent e) {
-		e.setLine(0, ChatColor.translateAlternateColorCodes('&', e.getLine(0)));
-		e.setLine(1, ChatColor.translateAlternateColorCodes('&', e.getLine(1)));
-		e.setLine(2, ChatColor.translateAlternateColorCodes('&', e.getLine(2)));
-		e.setLine(3, ChatColor.translateAlternateColorCodes('&', e.getLine(3)));
+		e.setLine(0, colorize(e.getLine(0)));
+		e.setLine(1, colorize(e.getLine(1)));
+		e.setLine(2, colorize(e.getLine(2)));
+		e.setLine(3, colorize(e.getLine(3)));
 	}
 
 	@EventHandler

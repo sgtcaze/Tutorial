@@ -24,7 +24,7 @@ public class Example extends JavaPlugin implements Listener {
 		cow.setCustomName(ChatColor.GREEN + "Baby Cow");
 		cow.setCustomNameVisible(true);
 	}
-	
+
 	private void spawnVillager(Location loc) {
 		Villager v = (Villager) loc.getWorld().spawn(loc, Villager.class);
 		v.setCustomName(ChatColor.GREEN + "Tom");
@@ -33,7 +33,7 @@ public class Example extends JavaPlugin implements Listener {
 		v.setAgeLock(true);
 		v.setProfession(Profession.LIBRARIAN);
 	}
-	
+
 	private void spawnSkeleton(Location loc) {
 		Skeleton s = (Skeleton) loc.getWorld().spawn(loc, Skeleton.class);
 		s.setCustomName(ChatColor.AQUA + "9001");
@@ -44,15 +44,15 @@ public class Example extends JavaPlugin implements Listener {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
-			
-		if(!(sender instanceof Player)) {
-		    return false;
+
+		if (!(sender instanceof Player)) {
+			return false;
 		}
-		
+
 		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("test")) {
 			Location loc = player.getLocation();
-			
+
 			// Your method
 		}
 		return false;

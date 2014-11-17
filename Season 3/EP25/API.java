@@ -1,5 +1,7 @@
 package example;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -7,6 +9,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 
 public class API {
 
@@ -55,7 +61,7 @@ public class API {
 			pl.hidePlayer(p);
 		}
 
-		p.sendMessage("§aYou are now a spectator!");
+		p.sendMessage("&aYou are now a spectator!");
 	}
 
 	public void firework(Player p) {
@@ -72,16 +78,16 @@ public class API {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 
 		Objective objective = board.registerNewObjective("Test", "Test2");
-		objective.setDisplayName("§f§lPVP");
+		objective.setDisplayName("&f&lPVP");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-		Score score = objective.getScore("§6Kills");
+		Score score = objective.getScore("&6Kills");
 		score.setScore(getKills(p));
 
-		Score score2 = objective.getScore("§6Deaths");
+		Score score2 = objective.getScore("&6Deaths");
 		score2.setScore(getDeaths(p));
 
-		Score score3 = objective.getScore("§6Points");
+		Score score3 = objective.getScore("&6Points");
 		score3.setScore(getPoints(p));
 
 		p.setScoreboard(board);

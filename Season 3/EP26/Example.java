@@ -76,7 +76,7 @@ public class Example extends JavaPlugin implements Listener {
 	// Add an element to MySQL
 	private void insertElement(String element, String uuid){	
 		try {
-		    String query = "INSERT INTO `tutorial` VALUES(?, ?);"
+		    String query = "INSERT INTO `tutorial` VALUES(?, ?);";
 		
 			PreparedStatement p = connection.prepareStatement(query);
 			p.setString(1, element);

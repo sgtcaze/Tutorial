@@ -13,7 +13,8 @@ public class PlayerDropItem implements Listener {
 
 	@EventHandler
 	public void onDrop(PlayerDropItemEvent e) {
-		if (plugin.getGameManager().getSpectators().contains(e.getPlayer().getUniqeId()))
+		if (plugin.getGameManager().getSpectators().contains(e.getPlayer().getUniqeId())) {
 			e.setCancelled(true);
+		}		
 	}
 }

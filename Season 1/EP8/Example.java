@@ -9,14 +9,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin {
 
-	public void onEnable(){
+	public void onEnable() {
 		ourTask();
 	}
 
-	public void ourTask(){	
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
-			public void run(){
-				for(Player p : Bukkit.getOnlinePlayers()){	
+	public void ourTask() {
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				for (Player p : Bukkit.getOnlinePlayers()) {
 					p.sendMessage(ChatColor.GREEN + "This is the runnable. Have a potato!");
 					p.getInventory().addItem(new ItemStack(Material.BAKED_POTATO, 1));
 				}

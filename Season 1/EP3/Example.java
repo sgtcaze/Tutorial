@@ -21,16 +21,19 @@ public class Example extends JavaPlugin {
 		item.setItemMeta(meta);
 		return item;
 	}
-	
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
-		
-		if(!(sender instanceof Player)) {
-		    return false;
+
+	public boolean onCommand(CommandSender sender, Command cmd, String label,
+			String[] a) {
+
+		if (!(sender instanceof Player)) {
+			return false;
 		}
-		
+
 		Player player = (Player) sender;
-		if(cmd.getName().equalsIgnoreCase("test")){
-			player.getInventory().addItem(make(Material.WOOL, 1, 0, "Name", Arrays.asList("Line 1", "Line 2")));
+		if (cmd.getName().equalsIgnoreCase("test")) {
+			player.getInventory().addItem(
+					make(Material.WOOL, 1, 0, "Name",
+							Arrays.asList("Line 1", "Line 2")));
 		}
 		return false;
 	}

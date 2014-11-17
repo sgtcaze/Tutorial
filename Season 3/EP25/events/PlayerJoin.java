@@ -14,7 +14,7 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		if (GameState.state == GameState.STARTED) {
-			if (Bukkit.getOnlinePlayers().length >= 2) {
+			if (Bukkit.getOnlinePlayers().size() >= 2) {
 				plugin.getGameManager().startGame();
 			}
 		}

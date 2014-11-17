@@ -16,8 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Example extends JavaPlugin {
 
 	private Inventory inv;
-	
-	public void onEnable(){
+
+	public void onEnable() {
 		inv = Bukkit.createInventory(null, 9, "Title");
 		inv.addItem(make(Material.WOOL, 1, 0, "Name", Arrays.asList("Line 1", "Line 2")));
 	}
@@ -30,16 +30,16 @@ public class Example extends JavaPlugin {
 		item.setItemMeta(meta);
 		return item;
 	}
-	
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
-	
-	    if(!(sender instanceof Player)) {
-		    return false;
+
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
+
+		if (!(sender instanceof Player)) {
+			return false;
 		}
-	
+
 		Player player = (Player) sender;
-		
-		if(cmd.getName().equalsIgnoreCase("test")){
+
+		if (cmd.getName().equalsIgnoreCase("test")) {
 			player.openInventory(inv);
 		}
 		return false;

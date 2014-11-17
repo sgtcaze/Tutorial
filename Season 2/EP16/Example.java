@@ -22,8 +22,8 @@ public class Example extends JavaPlugin implements Listener {
 			Snowball snowball = (Snowball) projectile;
 			snowball.getWorld().createExplosion(snowball.getLocation(), 3F);
 		} else if (projectile instanceof Arrow) {
-			if (arrow.getShooter() instanceof Player) {
-			    Arrow arrow = (Arrow) projectile;
+			if (projectile.getShooter() instanceof Player) {
+				Arrow arrow = (Arrow) projectile;
 				Player player = (Player) arrow.getShooter();
 				player.teleport(arrow);
 			}

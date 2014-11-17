@@ -13,11 +13,11 @@ public class Example extends JavaPlugin implements Listener {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] a) {
-			
-	    if(!(sender instanceof Player)) {
-		    return false;
+
+		if (!(sender instanceof Player)) {
+			return false;
 		}
-		
+
 		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("test")) {
 			Location loc = player.getLocation();

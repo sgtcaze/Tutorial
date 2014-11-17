@@ -2,6 +2,7 @@ package example;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -16,6 +17,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import example.*;
+
 public class Example extends JavaPlugin implements Listener {
 	
     private Api api;
@@ -29,19 +32,19 @@ public class Example extends JavaPlugin implements Listener {
 	public void onEnable() {
 	    plugin = this;
 	
-	    api = new Api(this);
+	    api = new Api();
 	
-		getServer().getPluginManager().registerEvents(new Listeners(this), this);
+		getServer().getPluginManager().registerEvents(new Listeners(), this);
 
-		shop = Bukkit.createInventory(null, 9, "§0§nMy Custom Shop");
-		shop.setItem(0, createItem(Material.APPLE, 1, 0, "§3Apple", "§fPrice §6200 §fSilver"));
+		shop = Bukkit.createInventory(null, 9, "&0&nMy Custom Shop");
+		shop.setItem(0, createItem(Material.APPLE, 1, 0, "&3Apple", "&fPrice &6200 &fSilver"));
 	}
 	
 	public void onDisable() {
-		for(UUID u : money.keySet()){
-			getConfig().set(u + ".Silver", money.get(u));
+		for(Entry<UUID, Integer> entry : money.entrySet()) {
+			getConfig().set(entry.getKey() + ".Silver", entry.getValue());
 		}
-		
+
 		saveConfig();
 	}
 	

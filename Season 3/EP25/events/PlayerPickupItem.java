@@ -13,7 +13,8 @@ public class PlayerPickupItem implements Listener {
 
 	@EventHandler
 	public void onDrop(PlayerPickupItemEvent e) {
-		if (plugin.getGameManager().getSpectators().contains(e.getPlayer().getUniqueId()))
+		if (plugin.getGameManager().getSpectators().contains(e.getPlayer().getUniqueId())) {
 			e.setCancelled(true);
+		}		
 	}
 }

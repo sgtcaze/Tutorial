@@ -18,29 +18,29 @@ public class Example extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
-		
-		for(Entity e : Bukkit.getWorld("world").getEntities()){
-			if(e instanceof Villager){
+
+		for (Entity e : Bukkit.getWorld("world").getEntities()) {
+			if (e instanceof Villager) {
 				e.remove();
 			}
 		}
-		
+
 		ourEntities();
 	}
-	
-	private void ourEntities(){
+
+	private void ourEntities() {
 		Location loc = new Location(Bukkit.getWorld("world"), 294.5, 64, 281.5);
-		
+
 		EntityManager manager = RemoteEntities.createManager(this);
-		RemoteEntity entity = manager.createEntity(RemoteEntityType.Villager, loc, false);	
+		RemoteEntity entity = manager.createEntity(RemoteEntityType.Villager, loc, false);
 		entity.setStationary(true);
 		entity.setPushable(false);
 		entity.getBukkitEntity().setCustomName("§d§lTutorial");
 		entity.getBukkitEntity().setCustomNameVisible(true);
 	}
-	
+
 	@EventHandler
-	public void onDamage(EntityDamageEvent e){
+	public void onDamage(EntityDamageEvent e) {
 		e.setCancelled(true);
 	}
 }

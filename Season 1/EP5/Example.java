@@ -8,15 +8,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin {
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
-	
-	    if(!(sender instanceof Player)) {
-		    return false;
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a) {
+
+		if (!(sender instanceof Player)) {
+			return false;
 		}
-	
+
 		Player player = (Player) sender;
-		if(cmd.getName().equalsIgnoreCase("test")){
-			if(player.hasPermission("example.permission")){
+		if (cmd.getName().equalsIgnoreCase("test")) {
+			if (player.hasPermission("example.permission")) {
 				player.sendMessage(ChatColor.GREEN + "You have permission!");
 			} else {
 				player.sendMessage(ChatColor.RED + "You don't have permission!");

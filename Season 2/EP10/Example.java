@@ -9,13 +9,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 
-	public void onEnable(){
+	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
 	}
-	
+
 	@EventHandler
-	public void onChat(AsyncPlayerChatEvent event){		
-		if(event.getPlayer().hasPermission("chat.normal")){
+	public void onChat(AsyncPlayerChatEvent event) {
+		if (event.getPlayer().hasPermission("chat.normal")) {
 			event.setFormat(ChatColor.LIGHT_PURPLE + "%s" + ChatColor.DARK_AQUA + " > " + ChatColor.GREEN + "%s");
 		}
 	}
