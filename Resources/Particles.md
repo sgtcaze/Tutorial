@@ -1,7 +1,7 @@
 Particles
 =========
 
-1.7 or < 1.7 particles names (use these for packetName[0]/ the first String arg of "spawnParticles.")
+1.7 or < 1.7 particles names (use these for packetName[0]/ the first String argument of "spawnParticles.")
 
 angryVillager
 bubble
@@ -40,7 +40,7 @@ tilecrack_*_*
 townaura
 witchMagic
 
-Spigot 1.8 particle names (use these for packetName[1]/ the second String arg of "spawnParticles.")
+Spigot 1.8 particle names (use these for packetName[1]/ the second String argument of "spawnParticles.")
 
 EXPLOSION_NORMAL
 EXPLOSION_LARGE
