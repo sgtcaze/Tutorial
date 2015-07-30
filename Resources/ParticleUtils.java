@@ -64,7 +64,7 @@ public class ParticleUtils {
 
         if (Integer.valueOf(version.split("_")[1]) > 7
                 && Integer.valueOf(version.toLowerCase().split("_")[0].replace("v", "")) == 1) {
-            setField("a", valueOf.invoke(null, packetName[1])); //packetName[1] is the name of the packet as defined in EnumParticle (it is case sensitive)
+            setField("a", valueOf.invoke(null, packetName[0])); //packetName[1] is the name of the packet as defined in EnumParticle (it is case sensitive)
             setField("b", loc.getBlockX());
             setField("c", loc.getBlockY());
             setField("d", loc.getBlockZ());
