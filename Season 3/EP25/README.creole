@@ -1,0 +1,5 @@
+= NOTICE
+
+This specific episode of the series is considered Abandoned. We decided to redo the minigame tutorials. You can find the new repository here:
+
+https://github.com/sgtcaze/ZombieEscape

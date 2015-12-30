@@ -1,9 +1,6 @@
 package example;
 
-import java.util.HashMap;
-import java.util.UUID;
-import java.util.Map.Entry;
-
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
@@ -13,58 +10,61 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.UUID;
+
 public class Example extends JavaPlugin implements Listener {
 
-	private HashMap<UUID, Integer> money = new HashMap<>();
+    private FileConfiguration config;
+    private HashMap<UUID, Integer> money = new HashMap<>();
 
-	public void onEnable() {
-		getServer().getPluginManager().registerEvents(this, this);
-	}
+    public void onEnable() {
+        config = getConfig();
+        getServer().getPluginManager().registerEvents(this, this);
+    }
 
-	public void onDisable() {
-		for (Entry<UUID, Integer> entry : money.entrySet()) {
-			getConfig().set(entry.getKey() + ".Silver", entry.getValue());
-		}
+    public void onDisable() {
+        for (Entry<UUID, Integer> entry : money.entrySet()) {
+            config.set(entry.getKey() + ".Silver", entry.getValue());
+        }
 
-		saveConfig();
-	}
+        saveConfig();
+    }
 
-	@EventHandler
-	public void onJoin(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+        if (config.contains(uuid.toString())) {
+            money.put(uuid, getConfig().getInt(uuid + ".Silver"));
+        } else {
+            config.set(uuid + ".Silver", 0);
+            money.put(uuid, 0);
+        }
+    }
 
-		if (!getConfig().contains(p.getUniqueId().toString())) {
-			getConfig().set(p.getUniqueId() + ".Silver", 0);
-			money.put(p.getUniqueId(), 0);
-		} else {
-			money.put(p.getUniqueId(), getConfig().getInt(p.getUniqueId() + ".Silver"));
-		}
-	}
+    @EventHandler
+    public void onEntityDeath(EntityDeathEvent event) {
+        if (event.getEntity().getKiller() != null) {
+            if (event.getEntity() instanceof Monster) {
+                giveSilver(event.getEntity().getKiller(), 200);
+            } else if (event.getEntity() instanceof Villager) {
+                takeSilver(event.getEntity().getKiller(), 200);
+            }
+        }
+    }
 
-	@EventHandler
-	public void onEntityDeath(EntityDeathEvent e) {
-		if (e.getEntity() instanceof Monster) {
-			if (e.getEntity().getKiller() instanceof Player) {
-				Player p = e.getEntity().getKiller();
-				giveSilver(p, 200);
-			}
-		} else if (e.getEntity() instanceof Villager) {
-			if (e.getEntity() instanceof Player) {
-				Player p = e.getEntity().getKiller();
-				takeSilver(p, 200);
-			}
-		}
-	}
+    private void giveSilver(Player player, int money) {
+        UUID uuid = player.getUniqueId();
+        this.money.put(uuid, this.money.get(uuid) + money);
+        player.sendMessage("$" + money + " silver received!");
+    }
 
-	private void giveSilver(Player p, int i) {
-		UUID uuid = p.getUniqueId();
-		money.put(uuid, money.get(uuid) + i);
-		p.sendMessage("§2§l$" + i + " silver received!");
-	}
+    private void takeSilver(Player player, int money) {
+        UUID uuid = player.getUniqueId();
+        this.money.put(uuid, this.money.get(uuid) - money);
+        player.sendMessage("$" + money + " silver taken!");
+    }
 
-	private void takeSilver(Player p, int i) {
-		UUID uuid = p.getUniqueId();
-		money.put(uuid, money.get(uuid) - i);
-		p.sendMessage("§c§l$" + i + " silver taken!");
-	}
 }

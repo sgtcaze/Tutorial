@@ -12,28 +12,27 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin {
 
-	private void firework(Player player){
-        Firework fw = (Firework) player.getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
-        FireworkMeta fwmeta = fw.getFireworkMeta();
+    private void firework(Player player) {
+        Firework firework = (Firework) player.getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
+        FireworkMeta meta = firework.getFireworkMeta();
         FireworkEffect.Builder builder = FireworkEffect.builder();
-        builder.withTrail().withFlicker().withFade(Color.GREEN).withColor(Color.WHITE).withColor(Color.YELLOW)
-        .withColor(Color.BLUE).withColor(Color.FUCHSIA).withColor(Color.PURPLE).withColor(Color.MAROON).withColor(Color.LIME)
-		.withColor(Color.ORANGE).with(FireworkEffect.Type.BALL_LARGE);
-        fwmeta.addEffect(builder.build());
-        fwmeta.setPower(1);
-        fw.setFireworkMeta(fwmeta);
-   }
+        builder.withTrail().withFlicker().withFade(Color.GREEN, Color.WHITE, Color.YELLOW, Color.BLUE,
+                Color.FUCHSIA, Color.PURPLE, Color.MAROON, Color.LIME, Color.ORANGE)
+                .with(FireworkEffect.Type.BALL_LARGE);
+        meta.addEffect(builder.build());
+        meta.setPower(1);
+        firework.setFireworkMeta(meta);
+    }
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] a){
-	   
-	    if(!(sender instanceof Player)) {
-		    return false;
-		}
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] arguments) {
+        if (!(sender instanceof Player)) {
+            return false;
+        }
 
-		Player player = (Player) sender;
-		if(cmd.getName().equalsIgnoreCase("test")){
-			firework(player);
-		}
-		return false;
-	}
+        if (cmd.getName().equalsIgnoreCase("test")) {
+            firework((Player) sender);
+        }
+        return false;
+    }
+
 }

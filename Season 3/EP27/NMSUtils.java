@@ -1,4 +1,9 @@
-package me.sgtcaze.tutorial;
+package example;
+
+import net.minecraft.server.v1_7_R4.BiomeBase;
+import net.minecraft.server.v1_7_R4.BiomeMeta;
+import net.minecraft.server.v1_7_R4.EntityInsentient;
+import net.minecraft.server.v1_7_R4.EntityTypes;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -6,20 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.server.v1_7_R4.BiomeBase;
-import net.minecraft.server.v1_7_R4.BiomeMeta;
-import net.minecraft.server.v1_7_R4.EntityInsentient;
-import net.minecraft.server.v1_7_R4.EntityTypes;
-
 /**
-* author @BigTeddy98
-* Used for tutorial purposes
-* https://forums.bukkit.org/threads/tutorial-register-your-custom-entities-nms-reflection.258542/
-*/
+ * author @BigTeddy98
+ * Used for tutorial purposes
+ * https://forums.bukkit.org/threads/tutorial-register-your-custom-entities-nms-reflection.258542/
+ */
 
 public class NMSUtils {
 
-	public void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
+    public void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
         try {
  
             /*
@@ -101,7 +101,7 @@ public class NMSUtils {
                                 }
                             }
                         }
- 
+
                     }
                 }
             }
@@ -109,4 +109,5 @@ public class NMSUtils {
             e.printStackTrace();
         }
     }
+
 }

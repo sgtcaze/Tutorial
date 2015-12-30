@@ -8,12 +8,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 
-	public void onEnable(){
-		getServer().getPluginManager().registerEvents(this, this);
-	}
-	
-	@EventHandler
-	public void onJoin(PlayerJoinEvent event){
-		event.setJoinMessage(ChatColor.AQUA + event.getPlayer().getName() + " has joined the game");
-	}
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        event.setJoinMessage(ChatColor.AQUA + event.getPlayer().getName() + " has joined the game");
+    }
 }

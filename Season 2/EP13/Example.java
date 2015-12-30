@@ -11,21 +11,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-			String[] a) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] arguments) {
+        if (!(sender instanceof Player)) {
+            return false;
+        }
+		
+        if (cmd.getName().equalsIgnoreCase("test")) {
+            Player player = (Player) sender;
+            Location location = player.getLocation();
+            player.playSound(location, Sound.GHAST_SCREAM, 1, 0);
+            location.getWorld().playEffect(location, Effect.MOBSPAWNER_FLAMES, 2004);
+        }
+        return false;
+    }
 
-		if (!(sender instanceof Player)) {
-			return false;
-		}
-
-		Player player = (Player) sender;
-		if (cmd.getName().equalsIgnoreCase("test")) {
-			Location loc = player.getLocation();
-
-			player.playSound(loc, Sound.GHAST_SCREAM, 1, 0);
-
-			loc.getWorld().playEffect(loc, Effect.MOBSPAWNER_FLAMES, 2004);
-		}
-		return false;
-	}
 }

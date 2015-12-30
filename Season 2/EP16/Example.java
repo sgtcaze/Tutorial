@@ -11,22 +11,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Example extends JavaPlugin implements Listener {
 
-	public void onEnable() {
-		getServer().getPluginManager().registerEvents(this, this);
-	}
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+    }
 
-	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event) {
-		Projectile projectile = event.getEntity();
-		if (projectile instanceof Snowball) {
-			Snowball snowball = (Snowball) projectile;
-			snowball.getWorld().createExplosion(snowball.getLocation(), 3F);
-		} else if (projectile instanceof Arrow) {
-			if (projectile.getShooter() instanceof Player) {
-				Arrow arrow = (Arrow) projectile;
-				Player player = (Player) arrow.getShooter();
-				player.teleport(arrow);
-			}
-		}
-	}
+    @EventHandler
+    public void onProjectileHit(ProjectileHitEvent event) {
+        Projectile projectile = event.getEntity();
+        if (projectile instanceof Snowball) {
+            Snowball snowball = (Snowball) projectile;
+            snowball.getWorld().createExplosion(snowball.getLocation(), 3F);
+        } else if (projectile instanceof Arrow) {
+            if (projectile.getShooter() instanceof Player) {
+                Arrow arrow = (Arrow) projectile;
+                Player player = (Player) arrow.getShooter();
+                player.teleport(arrow);
+            }
+        }
+    }
+
 }

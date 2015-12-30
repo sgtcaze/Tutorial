@@ -1,28 +1,31 @@
 package example;
 
-import java.util.UUID;
-
 import org.bukkit.entity.Player;
 
-import example.Example;
+import java.util.UUID;
 
 public class Api {
 
-	private Example plugin = Example.getInstance();
+    private Example plugin;
 
-	public void giveSilver(Player p, int i) {
-		UUID uuid = p.getUniqueId();
-		plugin.getMoney().put(uuid, plugin.getMoney().get(uuid) + i);
-		p.sendMessage("§2§l$" + i + " silver received!");
-	}
+    public Api(Example plugin) {
+        this.plugin = plugin;
+    }
 
-	public void takeSilver(Player p, int i) {
-		UUID uuid = p.getUniqueId();
-		plugin.getMoney().put(uuid, plugin.getMoney().get(uuid) - i);
-		p.sendMessage("§c§l$" + i + " silver taken!");
-	}
+    public void giveSilver(Player player, int i) {
+        UUID uuid = player.getUniqueId();
+        plugin.getMoney().put(uuid, plugin.getMoney().get(uuid) + i);
+        player.sendMessage("$" + i + " silver received!");
+    }
 
-	public boolean hasEnough(Player p, int i) {
-		return plugin.getMoney().get(p.getUniqueId()) >= i);
-	}
+    public void takeSilver(Player player, int i) {
+        UUID uuid = player.getUniqueId();
+        plugin.getMoney().put(uuid, plugin.getMoney().get(uuid) - i);
+        player.sendMessage("$" + i + " silver taken!");
+    }
+
+    public boolean hasEnough(Player player, int i) {
+        return plugin.getMoney().get(player.getUniqueId()) >= i;
+    }
+
 }
