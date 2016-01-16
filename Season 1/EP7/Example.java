@@ -16,7 +16,7 @@ public class Example extends JavaPlugin {
         Firework firework = (Firework) player.getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
         FireworkMeta meta = firework.getFireworkMeta();
         FireworkEffect.Builder builder = FireworkEffect.builder();
-        builder.withTrail().withFlicker().withFade(Color.GREEN, Color.WHITE, Color.YELLOW, Color.BLUE,
+        builder.withTrail().withFlicker().withColor(Color.GREEN, Color.WHITE, Color.YELLOW, Color.BLUE,
                 Color.FUCHSIA, Color.PURPLE, Color.MAROON, Color.LIME, Color.ORANGE)
                 .with(FireworkEffect.Type.BALL_LARGE);
         meta.addEffect(builder.build());
